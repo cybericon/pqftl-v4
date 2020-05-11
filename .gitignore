@@ -1,1 +1,12 @@
+.vs
 env
+.env
+**/.env
+data_import
+.vscode
+**/__pycache__
+__pycache__/
+*.py[cod]
+*$py.class
+import_*.*
+*.csv

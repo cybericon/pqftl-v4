@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import psycopg2
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -88,9 +89,10 @@ WSGI_APPLICATION = 'pqftl.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+DATABASES = {}
 DATABASE_URL = os.environ['DATABASE_URL']
 DATABASES['default'] = dj_database_url.config(
-    conn_max_age=600, ssl_require=True)
+    conn_max_age=600)
 
 
 # Password validation
