@@ -29,7 +29,7 @@ SECRET_KEY = '4$5mg7&_05zku-+(g6i!nz_g*9^-r6m!2=5jh1x#r5-owwrr6i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pqftl-v4.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
