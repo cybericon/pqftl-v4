@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
-    'branch.apps.BranchConfig',
+    'location.apps.LocationConfig',
     'business.apps.BusinessConfig',
     'django_filters',
     'django.contrib.humanize',
