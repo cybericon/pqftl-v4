@@ -8,5 +8,5 @@ data_import
 __pycache__/
 *.py[cod]
 *$py.class
-import_*.*
+# import_*.*
 *.csv
