@@ -1,0 +1,135 @@
+{% extends 'pqftl/dashboard.html' %} {% block dashboard_content %}
+
+{% load humanize %}
+
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-md-4 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Total Branches
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ branches.count|intcomma }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-map-marked-alt fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-md-4 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Total Managers
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ total_managers|intcomma }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-md-4 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-secondary text-uppercase mb-1"
+            >
+              Total DSF
+            </div>
+            <div class="row no-gutters align-items-center">
+              <div class="col-auto">
+                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                  {{ total_dsf|intcomma }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-users fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="row justify-content-md-center">
+  <div class="col-lg-10">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h3 class="card-title">{{ title }}</h3>
+        <table class="table table-hover table-responsive-md">
+          <thead>
+            <tr>
+              <th scope="col">Branch Name</th>
+              <th scope="col">Branch Head</th>
+              <th scope="col" class="text-center">Managers</th>
+              <th scope="col" class="text-center">DSF</th>
+              <th scope="col" class="text-center">Branch Strength</th>
+              <th scope="col" class="text-center">Edit</th>
+            </tr>
+          </thead>
+          <tbody class="">
+            {% for branch in branches %}
+            <tr>
+              <td>
+                <a href="{% url 'branch_detail' branch.id %}"
+                  >{{branch.name}}</a
+                >
+              </td>
+              <td>
+                <a href="{% url 'salesperson_detail' branch.branch_head.id %}"
+                  >{{branch.branch_head}}</a
+                >
+              </td>
+              <td class="text-center">{{ branch.get_managers.count }}</td>
+              <td class="text-center">{{ branch.get_dsf.count }}</td>
+              <td class="text-center">{{ branch.branch_members.count }}</td>
+              <td class="text-center">
+                <a
+                  href="{% url 'branch_update' branch.id %}"
+                  class="btn btn-secondary btn-sm btn-icon-split"
+                >
+                  <span class="icon text-white-50">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                  <span class="text">Edit</span>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

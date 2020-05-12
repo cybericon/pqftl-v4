@@ -1,0 +1,20 @@
+{% extends 'pqftl/dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+        <hr>
+        <form action="" method ="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-primary btn-sm" type="submit" value="submit">
+        </form>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

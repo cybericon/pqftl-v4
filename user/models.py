@@ -66,3 +66,6 @@ class Profile(models.Model):
     sales_person = models.OneToOneField(
         SalesPerson, on_delete=models.SET_NULL, blank=True, null=True)
     profile_image = models.ImageField(upload_to='profile_images')
+
+    def __str__(self):
+        return self.user.username

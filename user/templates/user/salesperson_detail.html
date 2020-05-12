@@ -1,0 +1,179 @@
+{% extends 'pqftl/dashboard.html' %}
+
+{% block head_contents %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/fh-3.1.6/r-2.2.3/sp-1.0.1/datatables.min.css"/>
+{% endblock%}
+
+
+{% block dashboard_content %}
+{% include 'pqftl/partials/dashboard/summary-bar.html' %}
+
+<div class="row justify-content-md-center">
+{% if salesperson.is_manager %}
+    <div class="col-lg-6">
+        <div class="card border-bottom-secondary shadow">
+            <div class="card-body">
+                
+                <!-- Getting DSF Business-->
+                {% if team_members %}
+                    <h3 class="card-title">{{ title }} Team (DSF)</h3>
+                    <table class="table table-hover table-responsive-md">
+                        <thead class="">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col" class="text-right">Business</th>
+                                <th scope="col" class="text-right">Issued Business</th>
+                                <th scope="col" class="text-right">Pending Business</th>
+                                <th scope="col" class="text-right">New Cases</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                            {% for member in team_members %}
+                            <tr>
+                                <td><a href="{% url 'salesperson_detail' member.name.id %} ">{{member.name}}</a></td>
+                                <td class="text-right">{{member.total_business}}</td>
+                                <td class="text-right">{{member.issued_business}}</td>
+                                <td class="text-right">{{member.pending_business}}</td>
+                                <td class="text-right">{{member.new_cases}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h3 class="h5 bg-primary p-3 text-light rounded">There is no one in {{salesperson}}'s Direct Team</h3>
+                {% endif %}
+                <hr>
+                <!-- Getting Managers Busienss-->
+                {% if managers %}
+                    <h3 class="card-title">{{ title }} Team (Managers)</h3>
+                    <table class="table table-hover table-responsive-md">
+                        <thead class="">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col" class="text-right">DSF Strength</th>
+                                <th scope="col" class="text-right">Business</th>
+                                <th scope="col" class="text-right">Issued Business</th>
+                                <th scope="col" class="text-right">Pending Business</th>
+                                <th scope="col" class="text-right">New Cases</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                            {% for manager in managers %}
+                                <tr>
+                                    <td><a href="{% url 'salesperson_detail' manager.name.id %} ">{{manager.name}}</a></td>
+                                    <td class="text-right">{{manager.dsf.count}}</td>
+                                    <td class="text-right">{{manager.total_business}}</td>
+                                    <td class="text-right">{{manager.issued_business}}</td>
+                                    <td class="text-right">{{manager.pending_business}}</td>
+                                    <td class="text-right">{{manager.new_cases}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h3 class="h5 bg-primary p-3 text-light rounded">There is no manager reporting to  {{salesperson}}</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+    <div class="col-lg-6">
+        <div class="card border-bottom-secondary shadow">
+            <div class="card-body">
+                 <h3 class="card-title">{{ title }} Business Transactions</h3>
+                 <table id="transaction-table" class="table table-striped">
+                    <thead class="">
+                    <tr>
+                        <th scope="col">Sales Person</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Submission</th>
+                        <th scope="col">Issuance</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td><a href=" {% url 'salesperson_detail' transaction.sales_person.id %} ">{{ transaction.sales_person }}</a></td>
+                            <td>{{ transaction.amount }}</td>
+                            <td data-sort="{{transaction.submission_date|date:'Ymd'}}">{{ transaction.submission_date }}</td>
+                            <td data-sort="{{ transaction.issuance_date|date:'Ymd'}}" >{{ transaction.issuance_date }}</td>
+                            <td>{{ transaction.transaction_status }}</td>
+                            <td>{{ transaction.transaction_type }}</td>
+                            <td>
+                                <a href="{% url 'transaction_update' transaction.id %}" class="btn btn-secondary btn-sm btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+{% endblock %}
+
+
+{% block footer %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/fh-3.1.6/r-2.2.3/sp-1.0.1/datatables.min.js"></script>
+    <script>
+        $("input[type=radio]").on("change", function () {
+          $(this).closest("form").submit();
+        });
+      </script>
+
+    <script>
+      $(document).ready( function () {
+          $('#transaction-table').DataTable({
+            "lengthChange": true,
+            "lengthMenu": [ 10, 25, 50, 75, 100 ],
+            "order": [[2, 'desc']],
+            "autoWidth": false,
+            "processing": true,
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: [
+                {
+                  extend: 'copy',
+                  exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5 ]
+                  }
+                },
+                {
+                  extend: 'excel',
+                  exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5]
+                  }
+                },
+                {
+                  extend: 'pdf',
+                  exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5]
+                  }
+                },
+                {
+                  extend: 'print',
+                  exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5 ]
+                  }
+                }
+            ]
+          });
+      } );
+    </script>
+
+    {% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'pqftl/dashboard.html' %}
+
+{% block dashboard_content  %}
+    <!-- Content Row -->
+    {% include 'pqftl/partials/dashboard/summary-bar.html' %}
+    <!-- Content Row -->
+    {% include 'pqftl/partials/dashboard/charts.html' %}
+    <!-- Content Row -->
+    {% include 'pqftl/partials/dashboard/top-performer.html' %}
+    <!-- Content Row -->
+    {% include 'pqftl/partials/dashboard/low-performer.html' %}
+{% endblock  %}
+
+{% block dashboard_footer %}
+{{ branches|json_script:"branches-data" }}
+  {{ business|json_script:"business-data" }}
+  <script>
+  
+    const branches = JSON.parse(document.getElementById('branches-data').textContent);
+    const business = JSON.parse(document.getElementById('business-data').textContent);
+  </script>
+  {% load static %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static 'pqftl/js/charts/branch_business_chart.js' %}"></script>
+  <script src="{% static 'pqftl/js/charts/branch_contribution_chart.js' %}"></script>
+
+  <script>
+    $('input[type=radio]').on('change', function() {
+      $(this).closest("form").submit();
+    });
+  </script>
+{% endblock %}

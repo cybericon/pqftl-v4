@@ -1,0 +1,137 @@
+{% load humanize %}
+
+<div class="mb-4">
+    <h3 class="h2 mb-3 text-dark-400 title">{{title}}</h3>
+
+    <div class="card text-center border-bottom-primary mb-2">
+      <div class="card-body">
+        <h5 class="card-title">Select Business Period</h5>
+        <hr>
+          <form action="" method="GET">
+            <div class="btn-group btn-group-toggle mb-2 mr-1" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="this_month" id="this_month"> This Month
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="last_month" id="last_month"> Last Month
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle mb-2 mr-1" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="this_qtr" id="this_qtr"> This Quarter
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="last_qtr" id="last_qtr" > Last Quarter
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle mb-2 mr-1" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="this_year" id="this_year" > This Year
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="period" value="last_year" id="last_year" > Last Year
+                </label>
+            </div>
+          </form>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Total Busniess
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ total_business|intcomma }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Issued Business
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ issued_business|intcomma }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Business -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-secondary text-uppercase mb-1"
+            >
+              Pending Business
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">{{pending_business|intcomma}}</div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- New Cases -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-secondary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-secondary text-uppercase mb-1"
+            >
+              New Cases
+            </div>
+            <div class="row no-gutters align-items-center">
+              <div class="col-auto">
+                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                  {{ new_cases }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

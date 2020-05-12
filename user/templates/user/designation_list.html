@@ -1,0 +1,45 @@
+{% extends 'pqftl/dashboard.html' %}
+
+{% block dashboard_content %}
+
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+         <table class="table table-striped">
+            <thead class="">
+            <tr>
+               <th scope="col">Title</th>
+               <th scope="col" colspan=2>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for designation in designations %}
+            <tr>
+               <td><a href="{% url 'designation_update' designation.id %}">{{ designation.name }} </a></td>
+               <td>
+                  <a href="{% url 'designation_update' designation.id %}" class="btn btn-secondary btn-sm btn-icon-split">
+                     <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                     </span>
+                     <span class="text">Edit</span>
+                     </a>
+               </td>
+               <td>
+                  <a href="{% url 'designation_delete' designation.id %}" class="btn btn-primary btn-sm btn-icon-split">
+                     <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                     </span>
+                     <span class="text">Delete</span>
+                     </a>
+               </td>
+            </tr>
+            {% endfor %}
+            </tboday>
+         </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

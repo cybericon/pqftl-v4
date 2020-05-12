@@ -1,0 +1,26 @@
+{% extends 'pqftl/dashboard.html' %} {% block dashboard_content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h5 class="card-title alert alert-error">Are you sure you want to {{ title }}?</h5>
+        <hr />
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input
+            class="btn btn-outline-primary btn-md"
+            type="submit"
+            value="Yes"
+          />
+          <a
+            href="{% if  not request.META.HTTP_REFERER %} {% url 'home' %} {% else %} {{ request.META.HTTP_REFERER }} {% endif %}"
+            class="btn btn-outline-secondary btn-md"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

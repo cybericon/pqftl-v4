@@ -1,0 +1,27 @@
+<div class="row">
+<div class="col-lg-6 mb-4">
+    <div class="card bg-primary shadow mb-4">
+        <div class="card-body text-light">
+            <h4 class="mb-3 font-weight-bold text-light">Managers at 0</h4>
+            <hr>
+            <table class="text-light">
+            {% for manager in zero_managers %}
+                <p> {{ manager }} </p> <hr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 mb-4">
+    <div class="card bg-primary shadow mb-4">
+        <div class="card-body text-light">
+            <h4 class="m-0 font-weight-bold">Branches at 0</h4>
+            <hr>
+            {% for branch in zero_branches %}
+            <p>{{ branch }}</p> <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>

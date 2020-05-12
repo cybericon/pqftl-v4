@@ -1,0 +1,109 @@
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #8B0037">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href=" {% url 'dashboard' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">PQFTL </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <div class="sidebar-brand-text mx-3 my-3 text-light">{{title}} </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Shortcuts
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'transaction_add' %}">
+          <i class="fas fa-fw fa-folder-plus"></i>
+          <span>Add New Business</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'salesperson_add' %}">
+          <i class="fas fa-fw fa-user-plus"></i>
+          <span>Add New Sales Person</span>
+        </a>
+      </li>
+
+    <hr class="sidebar-divider">
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Management
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#branches-menu" aria-expanded="true" aria-controls="branches-menu">
+          <i class="fas fa-fw fa-map-marked-alt"></i>
+          <span>Branches</span>
+        </a>
+        <div id="branches-menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'branch_list' %} ">All Branches</a>
+            <a class="collapse-item" href="{% url 'branch_add' %} ">Add New Branch</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#salesperson_menu" aria-expanded="true" aria-controls="salesperson_menu">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Sales Persons</span>
+        </a>
+        <div id="salesperson_menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'salesperson_list' %} ">All Manager</a>
+            <a class="collapse-item" href="{% url 'salesperson_add' %} ">Add New Person</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#business-menu" aria-expanded="true" aria-controls="business-menu">
+          <i class="fas fa-fw fa-chart-line"></i>
+          <span>Business</span>
+        </a>
+        <div id="business-menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'transaction_list' %} ">All Business Transactions</a>
+            <a class="collapse-item" href="{% url 'transaction_add' %} ">Add New Business</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#designation_menu" aria-expanded="true" aria-controls="designation_menu">
+          <i class="fas fa-fw fa-user-tie"></i>
+          <span>Job Designations / Titles</span>
+        </a>
+        <div id="designation_menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'designation_list' %} ">All Jobs Designations</a>
+            <a class="collapse-item" href="{% url 'designation_add' %} ">Add New Designation</a>
+          </div>
+        </div>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>

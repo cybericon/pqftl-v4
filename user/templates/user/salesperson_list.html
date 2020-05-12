@@ -1,0 +1,68 @@
+{% extends 'pqftl/dashboard.html' %}
+
+{% block dashboard_content %}
+
+
+<div class="row justify-content-md-center">
+  <div class="col-lg-10">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h3 class="card-title">{{ title }}</h3>
+        <table class="table table-hover table-responsive-md">
+          <thead>
+            <tr>
+              <th scope="col">Manager Name</th>
+              <th scope="col">Reporting Manager</th>
+              <th scope="col" class="text-center">Branch</th>
+              <th scope="col" class="text-center">DSF</th>
+              <th scope="col" class="text-center">Managers</th>
+              <th scope="col" class="text-center">Edit</th>
+            </tr>
+          </thead>
+          <tbody class="">
+            {% for manager in managers %}
+            <tr>
+              <td>
+                <a href="{% url 'salesperson_detail' manager.id %}"
+                  >{{manager.name}}</a
+                >
+              </td>
+              <td>
+               {% if manager.reporting_manager.id %}
+                  <a href="{% url 'salesperson_detail' manager.reporting_manager.id %}">
+                     {{ manager.reporting_manager }}
+                  </a>
+               {% else %}
+                  {{ manager.reporting_manager.name }}
+               {% endif %}
+               
+              </td>
+              <td class="text-center">
+               <a href="{% url 'branch_detail' manager.branch_name.id %}"
+                  >{{ manager.branch_name }}</a
+                >
+              </td>
+              <td class="text-center">{{ manager.get_dsf.count }}</td>
+              <td class="text-center">{{ manager.get_managers.count }}</td>
+              <td class="text-center">
+                <a
+                  href="{% url 'salesperson_update' manager.id %}"
+                  class="btn btn-secondary btn-sm btn-icon-split"
+                >
+                  <span class="icon text-white-50">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                  <span class="text">Edit</span>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

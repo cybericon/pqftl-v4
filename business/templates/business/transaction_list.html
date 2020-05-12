@@ -1,0 +1,131 @@
+{% extends 'pqftl/dashboard.html' %}
+{% block head_contents %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/fh-3.1.6/r-2.2.3/sp-1.0.1/datatables.min.css"/>
+{% endblock%}
+{% block dashboard_content %}
+
+{% include 'pqftl/partials/common/filter_bar.html' %}
+
+<div class="row justify-content-md-center">
+  <div class="col">
+    <div class="card border-bottom-secondary shadow">
+      <div class="card-body">
+        <h3 class="card-title">{{ title }}</h3>
+         <table id="transaction-table" class="table table-striped">
+            <thead class="">
+               <tr>
+                  <th scope="col">Sales Person</th>
+                  <th scope="col">Branch</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Submission</th>
+                  <th scope="col">Issuance</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for transaction in transactions %}
+                  <tr>
+                     <td><a href="{% url 'transaction_update' transaction.id %}">{{ transaction.sales_person }} </a></td>
+                     <td>{{ transaction.sales_person.branch_name }}</td>
+                     <td>{{ transaction.amount }}</td>
+                     <td data-sort="{{transaction.submission_date|date:'Ymd'}}">{{ transaction.submission_date }}</td>
+                     <td data-sort="{{ transaction.issuance_date|date:'Ymd'}}" >{{ transaction.issuance_date }}</td>
+                     <td>{{ transaction.transaction_status }}</td>
+                     <td>{{ transaction.transaction_type }}</td>
+                     <td>
+                        <a href="{% url 'transaction_update' transaction.id %}" class="btn btn-secondary btn-sm btn-icon-split">
+                           <span class="icon text-white-50">
+                              <i class="fas fa-edit"></i>
+                           </span>
+                           <span class="text">Edit</span>
+                           </a>
+                     </td>
+                     <td>
+                        <a href="{% url 'transaction_delete' transaction.id %}" class="btn btn-primary btn-sm btn-icon-split">
+                           <span class="icon text-white-50">
+                              <i class="fas fa-trash"></i>
+                           </span>
+                           <span class="text">Delete</span>
+                           </a>
+                     </td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/fh-3.1.6/r-2.2.3/sp-1.0.1/datatables.min.js"></script>
+<script>
+   $(document).ready( function () {
+      $('#transaction-table').DataTable({
+         "lengthChange": true,
+         "lengthMenu": [ 10, 25, 50, 75, 100 ],
+         "order": [],
+         "autoWidth": true,
+         "processing": true,
+         responsive: true,
+         dom: 'Bflrtip',
+         buttons: [
+            {
+               extend: 'copy',
+               exportOptions: {
+               columns: [ 0, 1, 2, 3, 4, 5 ,6 ]
+               }
+            },
+            {
+               extend: 'excel',
+               exportOptions: {
+               columns: [ 0, 1, 2, 3, 4, 5 ,6 ]
+               }
+            },
+            {
+               extend: 'pdf',
+               exportOptions: {
+               columns: [ 0, 1, 2, 3, 4, 5 ,6 ]
+               }
+            },
+            {
+               extend: 'print',
+               exportOptions: {
+               columns: [ 0, 1, 2, 3, 4, 5 ,6 ]
+               }
+            }
+         ]
+      });
+   } );
+</script>
+{{ branches|json_script:"branches-data" }}
+{{ business|json_script:"business-data" }}
+{{ top_consultants|json_script:"top-consultants-data" }}
+{{ top_consultants_business|json_script:"top-consultants-business-data" }}
+{{ business_trend_data|json_script:"business-trend-data" }}
+<script>
+  
+    const branches = JSON.parse(document.getElementById('branches-data').textContent);
+    const business = JSON.parse(document.getElementById('business-data').textContent);
+    const top_consultants = JSON.parse(document.getElementById('top-consultants-data').textContent);
+    const top_consultants_business = JSON.parse(document.getElementById('top-consultants-business-data').textContent);
+    const business_trend = JSON.parse(document.getElementById('business-trend-data').textContent);
+
+    
+</script>
+{% load static %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static 'pqftl/js/charts/top_performers_chart.js' %}"></script>
+  <script src="{% static 'pqftl/js/charts/branch_contribution_chart.js' %}"></script>
+  <script src="{% static 'pqftl/js/charts/business_trend_chart.js' %}"></script>
+
+{% endblock%}
