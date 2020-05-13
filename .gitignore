@@ -1,6 +1,7 @@
 .vs
 env
 .env
+pqftl/.env
 **/.env
 data_import
 .vscode
