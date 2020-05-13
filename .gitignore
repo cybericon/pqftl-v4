@@ -12,3 +12,4 @@ __pycache__/
 import_*.*
 *.csv
 mediafiles
+pqftl/static/
