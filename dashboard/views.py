@@ -25,8 +25,6 @@ def dashboard(request):
         0, len(y_values)) if y_values[x] == 0]
     zero_branches = [x_values[x] for x in zero_branches_indices]
 
-    print(zero_branches)
-
     # setting Managers Businesses
     managers = [(manager, manager.branch_name, get_manager_business(
         transactions, manager)) for manager in all_managers]
