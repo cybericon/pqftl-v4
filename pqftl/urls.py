@@ -24,16 +24,11 @@ from dashboard.views import logout_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(template_name='pqftl/login.html'), name='login'),
-    path('logout/', logout_page, name='logout'),
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+
+    #  Apps Urls
     path('', include('dashboard.urls')),
     path('location/', include('location.urls')),
     path('user/', include('user.urls')),
     path('business/', include('business.urls')),
 ]
-
-
-if settings.DEBUG:
-    # urlpatterns += static(settings.STATIC_URL,
-    #                       document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)

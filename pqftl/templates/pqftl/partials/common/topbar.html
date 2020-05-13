@@ -28,7 +28,7 @@
         >
         <img
           class="img-profile rounded-circle"
-          src="{# {% static 'pqftl/images/profile.png' %}  #}{{MEDIA_PREFIX}}{{request.user.profile.profile_image}} "
+          src="{# {% static 'pqftl/images/profile.png' %}  #}{{request.user.profile.profile_image.url}} "
         />
       </a>
       <!-- Dropdown - User Information -->
