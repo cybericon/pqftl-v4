@@ -12,7 +12,7 @@ from business.models import Transaction
 @login_required(login_url='login')
 def dashboard(request):
     transactions = period_filter(request, Transaction.records.all())
-    branches = Branch.locations.all()
+    branches = Branch.locations.all().order_by('id')
     all_managers = SalesPerson.persons.managers()
     all_dsf = SalesPerson.persons.dsf()
 
