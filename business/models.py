@@ -34,7 +34,7 @@ class Transaction(models.Model):
     records = TransactionQuerySet.as_manager()
 
     def get_absolute_url(self):
-        return reverse("transaction_detail", kwargs={"pk": self.pk})
+        return reverse("transaction_list")
 
     def __str__(self):
         return f" {self.sales_person.name} - {self.sales_person.branch_name.name} - {self.amount}"
