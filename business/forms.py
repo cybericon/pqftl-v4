@@ -13,6 +13,9 @@ class TransactionForm(ModelForm):
         'type': 'date'
     }))
 
+    def clean_issuance_date(self):
+        return None if self.cleaned_data['issuance_date'] == '' else self.cleaned_data['issuance_date']
+
     class Meta:
         model = Transaction
         fields = '__all__'
