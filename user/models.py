@@ -13,7 +13,7 @@ class Designation(models.Model):
     titles = DesignationQueryset.as_manager()
 
     def get_absolute_url(self):
-        return reverse("designation_detail", kwargs={"pk": self.pk})
+        return reverse("designation_list")
 
     def __str__(self):
         return self.name
@@ -41,7 +41,7 @@ class SalesPerson(models.Model):
     persons = SalesPersonQueryset.as_manager()
 
     def get_absolute_url(self):
-        return reverse("salesperson_detail", kwargs={"pk": self.pk})
+        return reverse("salesperson_list")
 
     def get_personal_business(self):
         from business.models import Transaction

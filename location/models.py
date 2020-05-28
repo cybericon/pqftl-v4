@@ -15,7 +15,7 @@ class Branch (models.Model):
     locations = BranchQueryset.as_manager()
 
     def get_absolute_url(self):
-        return reverse("branch_detail", kwargs={"pk": self.pk})
+        return reverse("branch_list")
 
     def get_dsf(self):
         return self.branch_members.dsf()
